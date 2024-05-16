@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plannerBenchmark xmlns="https://timefold.ai/xsd/benchmark" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://timefold.ai/xsd/benchmark https://timefold.ai/xsd/benchmark/benchmark.xsd">
+    <benchmarkDirectory>local</benchmarkDirectory>
+
+    <inheritedSolverBenchmark>
+        <solver>
+            <environmentMode>REPRODUCIBLE</environmentMode>
+            <!-- Define the model -->
+            <solutionClass>lv.lu.df.combopt.domain.TSPsolution</solutionClass>
+            <entityClass>lv.lu.df.combopt.domain.TSPsalesman</entityClass>
+            <entityClass>lv.lu.df.combopt.domain.TSPvisit</entityClass>
+
+            <!-- Define the score function -->
+            <scoreDirectorFactory>
+                <constraintProviderClass>lv.lu.df.combopt.solver.TSPcost</constraintProviderClass>
+            </scoreDirectorFactory>
+
+            <!-- Configure the optimization algorithms (optional) -->
+            <termination>
+                <unimprovedSecondsSpentLimit>300</unimprovedSecondsSpentLimit>
+            </termination>
+
+            <constructionHeuristic />
+        </solver>
+
+        <problemBenchmarks>
+            <solutionFileIOClass>lv.lu.df.combopt.domain.TSPio</solutionFileIOClass>
+            <writeOutputSolutionEnabled>false</writeOutputSolutionEnabled>
+            <inputSolutionFile>data/distance_matrix_1.csv</inputSolutionFile>
+            <inputSolutionFile>data/distance_matrix_2.csv</inputSolutionFile>
+            <inputSolutionFile>data/distance_matrix_3.csv</inputSolutionFile>
+            <inputSolutionFile>data/matrix_4.csv</inputSolutionFile>
+        </problemBenchmarks>
+    </inheritedSolverBenchmark>
+
+    <solverBenchmark>
+        <name>Tabu 10 1000 subCh listCh listSw</name>
+        <solver>
+            <localSearch>
+                <unionMoveSelector>
+                    <subListChangeMoveSelector />
+                    <listChangeMoveSelector />
+                    <listSwapMoveSelector />
+                </unionMoveSelector>
+                <acceptor>
+                    <valueTabuSize>10</valueTabuSize>
+                </acceptor>
+                <forager>
+                    <acceptedCountLimit>1000</acceptedCountLimit>
+                </forager>
+            </localSearch>
+        </solver>
+    </solverBenchmark>
+    <solverBenchmark>
+        <name>Tabu 10 1000 subCh</name>
+        <solver>
+            <localSearch>
+                <unionMoveSelector>
+                    <subListChangeMoveSelector />
+                </unionMoveSelector>
+                <acceptor>
+                    <valueTabuSize>10</valueTabuSize>
+                </acceptor>
+                <forager>
+                    <acceptedCountLimit>1000</acceptedCountLimit>
+                </forager>
+            </localSearch>
+        </solver>
+    </solverBenchmark>
+    <solverBenchmark>
+        <name>Tabu 5 1000 subCh</name>
+        <solver>
+            <localSearch>
+                <unionMoveSelector>
+                    <subListChangeMoveSelector />
+                </unionMoveSelector>
+                <acceptor>
+                    <valueTabuSize>5</valueTabuSize>
+                </acceptor>
+                <forager>
+                    <acceptedCountLimit>1000</acceptedCountLimit>
+                </forager>
+            </localSearch>
+        </solver>
+    </solverBenchmark>
+    <solverBenchmark>
+        <name>Tabu 10 1000 kOpt</name>
+        <solver>
+            <localSearch>
+                <unionMoveSelector>
+                   <kOptListMoveSelector />
+                </unionMoveSelector>
+                <acceptor>
+                    <valueTabuSize>10</valueTabuSize>
+                </acceptor>
+                <forager>
+                    <acceptedCountLimit>1000</acceptedCountLimit>
+                </forager>
+            </localSearch>
+        </solver>
+    </solverBenchmark>
+    <solverBenchmark>
+        <name>Tabu 10 1000 kOpt subCh</name>
+        <solver>
+            <localSearch>
+                <unionMoveSelector>
+                    <kOptListMoveSelector />
+                    <subListChangeMoveSelector />
+                </unionMoveSelector>
+                <acceptor>
+                    <valueTabuSize>10</valueTabuSize>
+                </acceptor>
+                <forager>
+                    <acceptedCountLimit>1000</acceptedCountLimit>
+                </forager>
+            </localSearch>
+        </solver>
+    </solverBenchmark>
+
+</plannerBenchmark>
