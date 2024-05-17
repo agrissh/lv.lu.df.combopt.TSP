@@ -18,10 +18,10 @@ public class Main {
     public static void main(String[] args) {
         LOGGER.info("TSP Optimizer started");
 
-        TSPsolution problem = TSPsolution.readFromCSV("data/distance_matrix_1.csv");
-        TSPsolution problem2 = TSPsolution.readFromCSV("data/distance_matrix_2.csv");
-        TSPsolution problem3 = TSPsolution.readFromCSV("data/distance_matrix_3.csv");
-        TSPsolution problem4 = TSPsolution.readFromCSV("data/matrix_4.csv");
+        TSPsolution problem = TSPsolution.readFromCSV("data/distance_matrix_1.csv", true);
+        TSPsolution problem2 = TSPsolution.readFromCSV("data/distance_matrix_2.csv", true);
+        TSPsolution problem3 = TSPsolution.readFromCSV("data/distance_matrix_3.csv", true);
+        TSPsolution problem4 = TSPsolution.readFromCSV("data/matrix_4.csv", true);
 
         /* SolverFactory<TSPsolution> solverFactory = SolverFactory.create(
                 new SolverConfig()

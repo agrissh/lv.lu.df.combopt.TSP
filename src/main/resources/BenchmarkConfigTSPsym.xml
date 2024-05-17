@@ -26,7 +26,7 @@
         </solver>
 
         <problemBenchmarks>
-            <solutionFileIOClass>lv.lu.df.combopt.domain.TSPio</solutionFileIOClass>
+            <solutionFileIOClass>lv.lu.df.combopt.domain.TSPioSym</solutionFileIOClass>
             <writeOutputSolutionEnabled>true</writeOutputSolutionEnabled>
             <inputSolutionFile>data/distance_matrix_1.csv</inputSolutionFile>
             <inputSolutionFile>data/distance_matrix_2.csv</inputSolutionFile>

@@ -14,6 +14,8 @@ import lombok.Value;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -44,7 +46,7 @@ public class TSPsolution {
         });
     }
 
-    public static final TSPsolution readFromCSV(String path) {
+    public static final TSPsolution readFromCSV(String path, Boolean assymetric) {
         TSPsolution solution = new TSPsolution();
         solution.setSolutionId(path);
 
@@ -77,7 +79,14 @@ public class TSPsolution {
                 }
 
                 Double distance = Double.parseDouble(items[4]);
-                visit.getDistanceMap().put(toVisit, distance);
+                if (assymetric) {
+                    visit.getDistanceMap().put(toVisit, distance);
+                } else {
+                    Double other_distance = toVisit.getDistanceMap().getOrDefault(visit, 0.0);
+                    Double max_distance = Math.max(distance, other_distance);
+                    visit.getDistanceMap().put(toVisit, max_distance);
+                    toVisit.getDistanceMap().put(visit, max_distance);
+                }
             }
 
 
@@ -88,5 +97,23 @@ public class TSPsolution {
         }
 
         return solution;
+    }
+
+    public void writeToCSV(File file) {
+        try {
+            FileWriter f = new FileWriter(file);
+
+            for (TSPsalesman s: this.salesmanList) {
+                f.write(s.getName() + ",");
+                for (TSPvisit v: s.getVisitList()) {
+                    f.write(v.getName() + ",");
+                }
+                f.write(System.lineSeparator());
+            }
+
+            f.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
