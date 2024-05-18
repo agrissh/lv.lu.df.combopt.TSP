@@ -6,7 +6,7 @@ import ai.timefold.solver.benchmark.api.PlannerBenchmarkFactory;
 public class BRunner {
     public static void main(String[] args) {
         PlannerBenchmarkFactory benchmarkFactoryFromXML = PlannerBenchmarkFactory
-                .createFromXmlResource("BenchmarkConfig.xml");
+                .createFromXmlResource("BenchmarkConfigCVRP.xml");
         PlannerBenchmark benchmark = benchmarkFactoryFromXML.buildPlannerBenchmark();
 
         benchmark.benchmarkAndShowReportInBrowser();
